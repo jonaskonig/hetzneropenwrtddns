@@ -5,12 +5,15 @@ Update your domain via Openwrt using Hetzner Api
 2. Create your dns zone and your records 
 3. create an pi key (https://dns.hetzner.com/settings/api-token)
 4. Find out your zone-id, and your record id by running: 
+  ```
   curl "https://dns.hetzner.com/api/v1/records?zone_id={ZoneID}" \
      -H 'Auth-API-Token: LlGoDUQ39S6akqoav5meAsv5OIpeywhj'
+  ```
      ZoneID is your domain name.
 5. Copy the update_hetzner.sh script to /etc/ddns/ on your openwrt router
-6. edit your /etc/config/ddns and add:
-ipv6:
+6. edit your /etc/config/ddns and add:<br>
+ipv6:<br>
+```
 config service 'hetznerv6'
         option use_ipv6 '1'
         option enabled '1'
@@ -28,7 +31,9 @@ config service 'hetznerv6'
         option retry_unit 'seconds'
         option ip_network 'wan6'
         option interface 'wan6'
-ipv4:
+``` 
+<br>ipv4: <br>
+```
 config service 'hetznerv4'
         option use_ipv6 '0'
         option enabled '1'
@@ -46,4 +51,5 @@ config service 'hetznerv4'
         option retry_unit 'seconds'
         option ip_network 'wan'
         option interface 'wan'
+```
 You should now have a working dyndns
